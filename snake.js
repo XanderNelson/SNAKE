@@ -1,6 +1,6 @@
 // snake game made possible with help from freeCodeCamp.org, video at https://www.youtube.com/watch?v=bRlvGoWz6Ig
-var count = 0;
 
+var count = 0;
 const base = require('./baseSnake');
 
 Object.getOwnPropertyNames(base).map(p => global[p] = base[p]);
@@ -21,11 +21,12 @@ const validMove = move => state =>
 function updateScore(){
   count = count + 10;
   document.getElementById('score').innerHTML = "SCORE: " + count;
-  return count;
+  // return count;
 }
-function sendScore(){
-  alert("score: " + count)
-}
+
+// function sendScore(){
+//   alert("score: " + count)
+// }
 
 
 // next values
@@ -33,6 +34,7 @@ const nextMoves = state => state.moves.length > 1 ? dropFirst(state.moves) : sta
 const nextApple = state => willEat(state) ? rndPos(state) : state.apple
 
 const nextSize = state => willEat(state) ? updateScore() : []
+
 // const nextCrash = state => willCrash(state) ? sendScore() : []
 
 const nextHead = state => state.snake.length == 0
@@ -42,6 +44,7 @@ const nextHead = state => state.snake.length == 0
     y: mod(state.rows)(state.snake[0].y + state.moves[0].y),
   }
   const nextSnake = state => willCrash(state)
+    // ? sendScore()
     ? []
     : (willEat(state)
       ? [nextHead(state)].concat(state.snake)
